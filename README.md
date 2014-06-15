@@ -5,6 +5,8 @@ WINGS: Writing with INtelligent Guidance and Suggestions
 ## 1. Clucene
 > mkdir build          (Under the root folder clucene_final)
 
+> cd build 
+
 > cmake -DENABLE_ASCII_MODE=ON -DCMAKE_INSTALL_PREFIX=/usr ..
 
 > make

@@ -1,11 +1,7 @@
 WINGS
 =====
 # Introduction
-Welcome to use WINGS (Writing with INtelligent Guidance and Suggestions).
-WINGS is a Chinese input method extended on IBus-Pinyin with intelligent writing
-assistance. It focuses on providing real-time and intelligent suggestions, including
-syntactic and semantic-relative words and topic-relative sentences, to writers
-during their writing.
+Welcome to use WINGS (Writing with INtelligent Guidance and Suggestions). WINGS is a Chinese input method extended on IBus-Pinyin with intelligent writing assistance. It focuses on providing real-time and intelligent writing suggestions, including syntacticly and semanticly related words and contextually related sentences, to writers during their writing.
 
 
 # Build and Install

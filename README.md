@@ -59,8 +59,9 @@ Put the words and sentences resources in the following url to "/usr/share/ibus-p
 
 # Use WINGS
 ## 1. Remove the old ibus library (.so files) from the system
-/usr/lib/x86_64-linux-gnu/libibus-1.0.so.0.401.0
-/usr/lib/x86_64-linux-gnu/libibus-1.0.so.0
+> sudo rm /usr/lib/x86_64-linux-gnu/libibus-1.0.so.0.401.0
+
+> sudo rm /usr/lib/x86_64-linux-gnu/libibus-1.0.so.0
 
 ## 2. Add Chinese Pinyin to input method
 Enter the following command in terminal: 

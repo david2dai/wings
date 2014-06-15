@@ -1,0 +1,2 @@
+#!/bin/sh
+cp -r /home/david/David/svnworkspace/ibus/engine/*  /home/david/David/IBus/ibus-pinyin-1.4.0/src 

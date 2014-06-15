@@ -1,0 +1,2 @@
+#!/bin/sh
+cp -r /home/david/David/svnworkspace/ibus/ui/*  /home/david/David/IBus/ibus-1.4.2/ui/gtk

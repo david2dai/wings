@@ -1,0 +1,3 @@
+#!/bin/sh
+rm -rf /home/david/David/IBus/ibus-1.4.2/ibus/interface/.svn
+cp -r /home/david/David/svnworkspace/ibus/ibuspython/*  /home/david/David/IBus/ibus-1.4.2/ibus  

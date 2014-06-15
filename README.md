@@ -56,3 +56,26 @@ index subfolder is used for creating sentences index and testing search.
 Put the words and sentences resources in the following url to "/usr/share/ibus-pinyin/resources/" of your Ubuntu System.
 > http://pan.baidu.com/s/1bns3tUZ
 
+
+# Use WINGS
+## 1. Remove the old ibus library (.so files) from the system
+/usr/lib/x86_64-linux-gnu/libibus-1.0.so.0.401.0
+/usr/lib/x86_64-linux-gnu/libibus-1.0.so.0
+
+## 2. Add Chinese Pinyin to input method
+Enter the following command in terminal: 
+> ibus-setup
+
+There will be a window called "IBus Preferences" appearing, select "Input Method" page. 
+Click "Select an input method" list and add "Chinese-Pinyin" to system input method list.
+
+## 3. Select "IBus" as system's default input method
+Enter the following command in terminal: 
+> im-switch
+
+Then there will be a window called "Input Method Switcher" coming out.
+Select "Use IBus(ibus)" and click OK button.
+Logout system and re-Login
+
+## 4. Use "Ctrl+Space" to switch the input method. 
+In Terminal/Gedit/Browser editing area, use Ctrl+Space to enable WINGS and start your input. 

@@ -57,7 +57,7 @@ index subfolder is used for creating sentences index and testing search.
 
 ## 6. Words and Sentences resources
 Put the words and sentences resources in the following url to "/usr/share/ibus-pinyin/resources/" of your Ubuntu System.
-> http://pan.baidu.com/s/1bns3tUZ
+> http://pan.baidu.com/s/1bns3tUZ     
 
 
 # Use WINGS
@@ -83,3 +83,6 @@ Logout system and re-Login
 
 ## 4. Use "Ctrl+Space" to switch the input method. 
 In Terminal/Gedit/Browser editing area, use Ctrl+Space to enable WINGS and start your input. 
+
+# DEB Package(for Ubuntu 64-bit) and Demo video
+> http://pan.baidu.com/s/1bns3tUZ

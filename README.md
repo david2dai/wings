@@ -19,7 +19,7 @@ WINGS: Writing with INtelligent Guidance and Suggestions
 > sudo make install
 
 ## 3. ibus
-### 3.1. Copy the following subfolers to ibus-1.4.2 by modifying the updatecode scrpit
+### 3.1. Copy the files in the following subfolders to ibus-1.4.2 by modifying the scrpit file "updatecode" 
 > daemon
 
 > ibuslib
@@ -29,7 +29,7 @@ WINGS: Writing with INtelligent Guidance and Suggestions
 > ui
 
 ### 3.2. Dependent libraries
-apt-get install libgtk+2.0-dev libgtk-3-dev libgirepository1.0-dev libdbus-glib-1-dev libdconf-dev libgconf2-dev libdconf-dbus-1-dev dconf-tools libvala-0.16-dev libsqlite3-dev libnotify-dev python-gobject-dev python-notify python-dev python-dbus-dev python-enchant python-xdg uuid-dev iso-codes sqlite3 valac valabind gnome-common gtk-doc-tools
+> apt-get install libgtk+2.0-dev libgtk-3-dev libgirepository1.0-dev libdbus-glib-1-dev libdconf-dev libgconf2-dev libdconf-dbus-1-dev dconf-tools libvala-0.16-dev libsqlite3-dev libnotify-dev python-gobject-dev python-notify python-dev python-dbus-dev python-enchant python-xdg uuid-dev iso-codes sqlite3 valac valabind gnome-common gtk-doc-tools
 
 ### 3.3. Build and Install
 > ./autogen.sh --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib
@@ -39,7 +39,7 @@ apt-get install libgtk+2.0-dev libgtk-3-dev libgirepository1.0-dev libdbus-glib-
 > sudo make install
 
 ## 4. ibus-pinyin
-### 4.1. Copy the following subfolers to ibus-pinyin-1.4.0 by modifying the updatecode scrpit
+### 4.1. Copy the files in the following subfolders to ibus-pinyin-1.4.0 by modifying the scrpit file "updatecode" 
 > engine
 
 ### 4.2. Build and Install

@@ -30,7 +30,6 @@ using namespace lucene::store;
 int cmp ( const SentenceInfo& a, const SentenceInfo& b )
 {
     if( a.fTotalScore > b.fTotalScore )  // Descending order 
-    //if( a.fLdaScore < b.fLdaScore)  // Ascending order 
         return 1;
     else
         return 0;
@@ -45,9 +44,6 @@ RecSentence::RecSentence (const char* indexSen,
 
     cd = iconv_open ("gb2312//IGNORE", "utf-8//IGNORE");
 
-    // New method 
-    //m_sentencesFileMain = fopen (sentencesCorpusFileMain, "rb");
-   
     // Load sentence offset info into memory 
     FILE * sentencesFileOffset = fopen (sentencesCorpusFileOffset, "rb");
     m_sentencesOffset = new SentenceOffset[DOC_CNT];
@@ -73,8 +69,6 @@ RecSentence::~RecSentence ( )
 {
     iconv_close(cd);
 
-    ////fclose (m_sentencesFile);
-    //fclose (m_sentencesFileMain);
     _CLLDELETE(analyzer);
     indexSearcher->close (); 
     _CLLDELETE(indexSearcher);
@@ -141,65 +135,8 @@ bool RecSentence::addWord2LocalContext (const char* szWord)
         return false;
     }
 
-    /*
-    FILE *outfile; 
-    outfile = fopen("/home/david/David/tablog","at");
-    char buffer[1024] = {0};
-
-    finish = clock();
-    dtime = (double)(finish - start) / CLOCKS_PER_SEC;
-
-    sprintf(buffer,"[%s]:add context word[%s] sucess, size if [%d] time:[%lf]\n",\
-            __FILE__, szWord, m_localContextVecWordId.size (), dtime);
-
-    fwrite (buffer , strlen(buffer), 1 , outfile);
-    fclose ( outfile );
-    */
-
     return true;
 }
-
-/*
-//
-bool RecSentence::getSentencesFrom (std::vector<long>& senIds, 
-                                    vector<SentenceInRawData>& sentencesInRawData)
-{
-    TimeLog timeLog;
-    ThreadInfo threadInfo[THREAD_CNT];
-
-    for (int i=0;i<THREAD_CNT;i++) {
-        threadInfo[i].senIds = &senIds;
-        threadInfo[i].sentencesInRawData = &sentencesInRawData;
-        threadInfo[i].sentencesOffset = m_sentencesOffset;
-        //threadInfo[i].fileSize = DOC_CNT/4 * sizeof (SentenceInRawData);
-        threadInfo[i].threadId = i;
-        threadInfo[i].sentencesMainFile = m_sentencesFileMain;
-        //strcpy (threadInfo[i].fileName, m_SentenceCorpusFiles[i]);
-    }
-
-    finshThreadCnt = 0;
-    pthread_mutex_init (&mutex, NULL);
-    
-    for (int i=0;i<THREAD_CNT;i++) {
-        pthread_t pid;  
-      
-        if(pthread_create (&pid, NULL, threadFun, &threadInfo[i]))  
-        {  
-            cout << "Error!" << endl;  
-        }
-
-    }
-
-    while (true) {
-        if (THREAD_CNT == finshThreadCnt) {
-            break;
-        }
-    }
-
-    cout << "Finish!" << endl;
-    return true;
-}
-*/
 
 bool RecSentence::getSentencesFrom (std::vector<long>& senIds, //docIds in lucene
                                     std::vector<SentenceInRawData>& sentencesInRawData)
@@ -233,13 +170,14 @@ bool RecSentence::getSentencesFrom (std::vector<long>& senIds, //docIds in lucen
         
         strcpy (sentencesInRawData[i].szSentence, buffer); 
         pbuf = buffer + senOrgLen + 1;
-        //log.logInfo ("QScore [%f] Sen [%s]\n", sentencesInRawData[i].qscore, sentencesInRawData[i].szSentence);
+        //log.logInfo ("QScore [%f] Sen [%s]\n", 
+        //sentencesInRawData[i].qscore, sentencesInRawData[i].szSentence);
         unsigned char * tAssignsAry = (unsigned char *) (pbuf);
         int totalWordCnt = senLdaLen / sizeof (unsigned char);
        
         /* 
-        log.logInfo ("SenId [%ld] QScore New [%f]  Sen [%s] \n",senId, 
-                sentencesInRawData[i].qscore, sentencesInRawData[i].szSentence );
+        log.logInfo ("SenId [%ld] QScore New [%f]  Sen [%s] \n",
+        senId, sentencesInRawData[i].qscore, sentencesInRawData[i].szSentence );
       
         */ 
         float alpha = 1.0;  // LDA alpha train paramter
@@ -407,23 +345,6 @@ bool RecSentence::searchSentencesAdvanced (const char*                   szOrigW
             sentenceInfos[i].fTotalScore = sentenceInfos[i].fLdaScore * sentenceInfos[i].fQScore;  
         }
 
-        /*
-        m_log.logInfo ("[%s][%s]:the min LDA score is [%f]\n",
-                __FILE__,
-                __FUNCTION__,
-                minLDAScore);
-
-        */
-
-        // Marked 2014.02.15
-        /*
-        for (int i = 0;i < sentenceInfos.size (); i++) {
-
-            sentenceInfos[i].fTotalScore = 1.0/(1.0 + sentenceInfos[i].fLdaScore-minLDAScore);
-            //sentenceInfos[i].fTotalScore = sentenceInfos[i].fLuceneScore + 2.0 * sentenceInfos[i].fTotalScore;
-        }
-        */
-
     }
   
     // Not need to sort here
@@ -431,32 +352,6 @@ bool RecSentence::searchSentencesAdvanced (const char*                   szOrigW
     // There will use KL score and Feedback info to re-rank 
     //sort (sentenceInfos.begin (), sentenceInfos.end (), cmp);
     
-    /*
-    for (int i= 0;i<10 && i < sentenceInfos.size (); i++) {
-
-        m_log.logInfo ("[%d]:[%f]:[%s]\n",
-                i+1,
-                sentenceInfos[i].fTotalScore,
-                sentenceInfos[i].szSentence);
-
-    }
-    */
-
-    /*
-    for (int i= 0;i < sentenceInfos.size (); i++) {
-
-        m_log.logInfo ("[%s][%s]:SenId[%d],luceneS[%f],ldaS[%f],total[%f],recSen[%s]\n",
-                __FILE__,
-                __FUNCTION__,
-                docIds[i],
-                sentenceInfos[i].fLuceneScore,
-                sentenceInfos[i].fLdaScore,
-                sentenceInfos[i].fTotalScore,
-                sentenceInfos[i].szSentence);
-
-    }
-    */
-
     _CLLDELETE(topDocs);
     _CLLDELETE(q);
 
